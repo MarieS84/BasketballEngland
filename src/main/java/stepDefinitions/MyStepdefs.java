@@ -15,11 +15,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 public class MyStepdefs {
     private WebDriver driver;
+    private String uniqueEmail = "svensson-test" + System.currentTimeMillis() + "@gmail.com";
 
     @Given("I am using {string} as browser")
     public void iAmUsingAsBrowser(String browser) {
@@ -50,16 +48,16 @@ public class MyStepdefs {
         dateField.sendKeys(lastName);
     }
 
-    @And("I fill in email address {string}")
-    public void iFillInEmailAddress(String email) {
+    @And("I fill in email address")
+    public void iFillInEmailAddress() {
         WebElement dateField = driver.findElement(By.name("EmailAddress"));
-        dateField.sendKeys(email);
+        dateField.sendKeys(uniqueEmail);
     }
 
-    @And("confirm email address {string}")
-    public void confirmEmailAddress(String confirmEmail) {
+    @And("confirm email address")
+    public void confirmEmailAddress() {
         WebElement dateField = driver.findElement(By.name("ConfirmEmailAddress"));
-        dateField.sendKeys(confirmEmail);
+        dateField.sendKeys(uniqueEmail);
     }
 
     @And("I choose password {string}")
