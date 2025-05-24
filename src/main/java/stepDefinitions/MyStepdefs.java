@@ -104,8 +104,8 @@ public class MyStepdefs {
 
     @Then("I receive a membership number")
     public void iReceiveAMembershipNumber() {
-        WebElement membershipNumber = (new WebDriverWait(driver, Duration.ofSeconds(2))).until(ExpectedConditions
-                .presenceOfElementLocated(By.cssSelector("h2.bold.margin-bottom-40")));
+        By membershipNumberLocator = By.cssSelector("h2.bold.margin-bottom-40");
+        WebElement membershipNumber = waitForElement(membershipNumberLocator, 2);
         Assert.assertFalse(membershipNumber.getText().isEmpty());
     }
 
@@ -126,5 +126,10 @@ public class MyStepdefs {
     public void iGetTheTermsConditionsWarningMessage(String expected) {
         WebElement termsError = driver.findElement(By.cssSelector("span[for='TermsAccept']"));
         Assert.assertEquals(expected, termsError.getText());
+    }
+
+    private WebElement waitForElement(By locator, int timeoutInSeconds) {
+        return new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds))
+                .until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 }
