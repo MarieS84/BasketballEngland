@@ -10,7 +10,7 @@ Feature: Basketball England registration form website test
     And I choose password "test&12345"
     And I retype password "test&12345"
     And I choose the role "signup_basketballrole_19"
-    And I confirm terms & conditions
+    And I choose to accept terms & conditions "true"
     And I am of legal age
     And I adhere to code of ethics
     When I confirm and join
@@ -26,7 +26,7 @@ Feature: Basketball England registration form website test
     And I choose password "test&12345"
     And I retype password "test&12345"
     And I choose the role "signup_basketballrole_19"
-    And I confirm terms & conditions
+    And I choose to accept terms & conditions "true"
     And I am of legal age
     And I adhere to code of ethics
     When I confirm and join
@@ -42,7 +42,7 @@ Feature: Basketball England registration form website test
     And I choose password "test&12345"
     And I retype password "test&123456"
     And I choose the role "signup_basketballrole_19"
-    And I confirm terms & conditions
+    And I choose to accept terms & conditions "true"
     And I am of legal age
     And I adhere to code of ethics
     When I confirm and join
@@ -63,24 +63,26 @@ Feature: Basketball England registration form website test
     When I confirm and join
     Then I get the terms & conditions warning message "You must confirm that you have read and accepted our Terms and Conditions"
 
-  Scenario Outline: Filling out account registration form with different user data
+
+  Scenario Outline: Filling out account registration form
     Given I am using "<browser>" as browser
-    Given I fill in date of birth is "27/08/1984"
-    And I fill in first name "<first_name>"
-    And I fill in last name "<last_name>"
+    And I fill in date of birth is "<dateOfBirth>"
+    And I fill in first name "<firstName>"
+    And I fill in last name "<lastName>"
     And I fill in email address
     And confirm email address
-    And I choose password "test&12345"
-    And I retype password "test&12345"
-    And I choose the role "signup_basketballrole_19"
-    And I confirm terms & conditions
+    And I choose password "<password>"
+    And I retype password "<confirmPassword>"
+    And I choose the role "<role>"
+    And I choose to accept terms & conditions "<acceptTerms>"
     And I am of legal age
     And I adhere to code of ethics
     When I confirm and join
-    Then I receive a membership number
+    Then <expectedResult>
 
     Examples:
-      | browser | first_name | last_name |
-      | chrome  | Marie      | Svensson  |
-      | edge    | Kalle      | Johansson |
-
+      | browser | dateOfBirth | firstName | lastName | password   | confirmPassword | role                     | acceptTerms | expectedResult                                                                                                           |
+      | edge    | 27/08/1984  | Marie     | Svensson | test&12345 | test&12345      | signup_basketballrole_19 | true        | I receive a membership number                                                                                            |
+      | edge    | 27/08/1984  | Marie     |          | test&12345 | test&12345      | signup_basketballrole_19 | true        | I get the warning message "Last Name is required"                                                                        |
+      | chrome  | 27/08/1984  | Marie     | Svensson | test&12345 | test&123456     | signup_basketballrole_19 | true        | I get the password warning message "Password did not match"                                                              |
+      | chrome  | 27/08/1984  | Marie     | Svensson | test&12345 | test&12345      | signup_basketballrole_19 | false       | I get the terms & conditions warning message "You must confirm that you have read and accepted our Terms and Conditions" |
