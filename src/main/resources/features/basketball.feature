@@ -2,7 +2,7 @@ Feature: Basketball England registration form website test
 
   Scenario: Filling out account registration form happy flow
     Given I am using "chrome" as browser
-    Given I fill in date of birth is "27/08/1984"
+    And I fill in date of birth is "27/08/1984"
     And I fill in first name "Marie"
     And I fill in last name "Svensson"
     And I fill in email address
@@ -18,7 +18,7 @@ Feature: Basketball England registration form website test
 
   Scenario: Filling out account registration form, last name is missing
     Given I am using "chrome" as browser
-    Given I fill in date of birth is "27/08/1984"
+    And I fill in date of birth is "27/08/1984"
     And I fill in first name "Marie"
     And I fill in last name ""
     And I fill in email address
@@ -34,7 +34,7 @@ Feature: Basketball England registration form website test
 
   Scenario: Filling out account registration form, passwords don't match
     Given I am using "chrome" as browser
-    Given I fill in date of birth is "27/08/1984"
+    And I fill in date of birth is "27/08/1984"
     And I fill in first name "Marie"
     And I fill in last name "Svensson"
     And I fill in email address
@@ -50,7 +50,7 @@ Feature: Basketball England registration form website test
 
   Scenario: Filling out account registration form, I don't confirm terms & conditions
     Given I am using "chrome" as browser
-    Given I fill in date of birth is "27/08/1984"
+    And I fill in date of birth is "27/08/1984"
     And I fill in first name "Marie"
     And I fill in last name "Svensson"
     And I fill in email address

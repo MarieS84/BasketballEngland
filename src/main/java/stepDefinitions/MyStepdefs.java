@@ -39,7 +39,7 @@ public class MyStepdefs {
         driver.get("https://membership.basketballengland.co.uk/NewSupporterAccount");
     }
 
-    @Given("I fill in date of birth is {string}")
+    @And("I fill in date of birth is {string}")
     public void iFillInDateOfBirthIs(String dateOfBirth) {
         WebElement dateField = driver.findElement(By.id("dp"));
         dateField.sendKeys(dateOfBirth);
